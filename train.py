@@ -144,28 +144,27 @@ def train_model(input_size,
 # plt.ylabel('accuracy')
 # plt.show()
     
-if __name__ == '__main__':
 
-    json_path = "./intents.json"
-    tags, all_words, xy = fetch_from_json(json_path)
-    X_train, y_train = prepare_training_data(tags, all_words, xy)
+json_path = "./intents.json"
+tags, all_words, xy = fetch_from_json(json_path)
+X_train, y_train = prepare_training_data(tags, all_words, xy)
 
-    # Hyperparameters 
-    batch_size = 8
-    hidden_size = 8
-    output_size = len(tags)
-    input_size = len(X_train[0])
-    lr_rate = 0.001
-    num_epochs = 1000
+# Hyperparameters 
+batch_size = 8
+hidden_size = 8
+output_size = len(tags)
+input_size = len(X_train[0])
+lr_rate = 0.001
+num_epochs = 1000
 
-    dataset = ChatDataset()
-    train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=0)
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+dataset = ChatDataset()
+train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=0)
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    train_model(input_size, 
-                hidden_size, output_size, 
-                lr_rate, num_epochs, 
-                train_loader)
+train_model(input_size, 
+            hidden_size, output_size, 
+            lr_rate, num_epochs, 
+            train_loader)
 
 
     
